@@ -20,7 +20,7 @@
 1. Go to **Tools > Board > Board Manager**
 1. Search for and Install _esp8266_
 1. Download the lastest build file
-1. Open Build_3.0 in the Arduino IDE
+1. Open src.ino in the Arduino IDE
 1. Go to **Tools > Board > ESP8266 Boards > NodeMCU 1.0**
 1. Connect _esp8266_ to computer using Micro USB cable
 1. Go to **Tools > Port** and select the port the _ESP8266_ is connected to. 
