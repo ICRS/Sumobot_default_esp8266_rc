@@ -14,7 +14,7 @@
 # Assembly instructions:
 1. Remove the jumpers on ENA and ENB on the L298n motor controller
 1. Connect up components as shown in the diagram below (red wires: jumper wires, black wires: misc, circles: soldering required)
-![Alt text](circuit.png)
+![Alt text](circuit (1).png)
 1. Download and install the Arduino IDE: https://www.arduino.cc/en/Main/Software
 1. Open Arduino IDE and go to **File > Preferrences** and copy and paste: https://arduino.esp8266.com/stable/package_esp8266com_index.json into the _Additional Board Manager URLs_
 1. Go to **Tools > Board > Board Manager**
