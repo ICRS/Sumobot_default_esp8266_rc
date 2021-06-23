@@ -60,6 +60,18 @@ const char CONTROL_3[] PROGMEM = R"=====(<!DOCTYPE html>
         Forward_R
         Forward_L
       */
+      var socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+      socket.onopen = function(){ 
+        socket.send("Connect ");
+      }
+      
+      socket.onmessage = function(e){
+        console.log(e.data);}
+
+      function send(x,y) {
+        socket.send("l" + x +"r" +y);
+      }
+        
       function conlog(direction){
         direction.onmouseup = function(){
             send(0,0);

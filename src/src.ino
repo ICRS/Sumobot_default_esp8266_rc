@@ -32,7 +32,7 @@ const byte LEDLeft = D7;
 const byte LEDLF = D6;    
 const byte LEDLB = D5;
 
-unsigned char LEDLeftint = 0; //LEFT value wheel control
+unsigned int LEDLeftint = 0; //LEFT value wheel control
 
 bool LEDLFbit;  //sets direction motor spins variables (refer to L298m H bridge)
 //WiFiClient client; 
@@ -42,7 +42,7 @@ const byte LEDRight = D1;
 const byte LEDRF = D2;    
 const byte LEDRB = D3;
 
-unsigned char LEDRightint = 0;
+unsigned int LEDRightint = 0;
 
 bool LEDRFbit;
 
@@ -167,9 +167,11 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 
           Serial.print(x); Serial.print(",");Serial.println(y);
           
-          LEDLeftint = abs(x)*50;
-          LEDRightint = abs(y)*50;
+          LEDLeftint = abs(x)*200;
+          LEDRightint = abs(y)*200;
 
+          Serial.println(LEDLeftint);
+          Serial.println(LEDRightint);
           if(x <0){
             LEDLFbit = 0;
             }

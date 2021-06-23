@@ -50,9 +50,18 @@ const char CONTROL_2[] PROGMEM = R"=====(<!DOCTYPE html>
 
     <script>
 
-        let socket = new WebSocket("wss://192.168.1.1:81/");
-
-
+        var socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+        socket.onopen = function(){ 
+          socket.send("Connect ");
+        }
+  
+        socket.onmessage = function(e){
+        console.log(e.data);}
+        
+        function SendUrl(x, y){
+          socket.send("l" + x +"r" +y);
+        }
+  
         var leftval = window.innerWidth/ 2 -50    , topval = window.innerHeight/ 2 -100;
         console.log(leftval);
 
@@ -66,11 +75,6 @@ const char CONTROL_2[] PROGMEM = R"=====(<!DOCTYPE html>
 
         dragElement(document.getElementById("drag"));
         
-
-        function SendUrl(left,right){
-        socket.send(left);
-      }
-
       function dragElement(elmnt) {
         var pos3 = 0, pos4 = 0, mag =0, send;
          
@@ -144,20 +148,20 @@ const char CONTROL_2[] PROGMEM = R"=====(<!DOCTYPE html>
           
           if(-3*(Math.PI/8)<angle && angle< -(Math.PI/8)){
                     // Sector 6
-                    L = 0;
-                    R = -5;
+                    L = -5;
+                    R = 0;
           }
 
           if(-5*(Math.PI/8)<angle && angle< -3*(Math.PI/8)){
             // Sector 7
-                    L = 5;
-                    R = -5;
+                    L = -5;
+                    R = 5;
                 }
 
           if(-7*(Math.PI/8)<angle && angle< -5*(Math.PI/8)){
             // Sector 8
-                    L = 5;
-                    R = 0;
+                    L = 0;
+                    R = 5;
           }
           
           if(7*(Math.PI/8)<angle || angle< -7*(Math.PI/8)){
@@ -167,22 +171,22 @@ const char CONTROL_2[] PROGMEM = R"=====(<!DOCTYPE html>
           }
           
           if(5*(Math.PI/8)<angle && angle< 7*(Math.PI/8)){
-                    // Sector 2
-                    L = 0;
-                    R = 5
-                }
+            // Sector 2
+            L = 5;
+            R = 0;
+          }
 
           if(3*(Math.PI/8)<angle && angle< 5*(Math.PI/8)){
             // Sector 3
-                    L = -5;
-                    R = 5;
-                }
+            L = 5;
+            R = -5;
+          }
 
           if(1*(Math.PI/8)<angle && angle< 3*(Math.PI/8)){
-            // Sector 4
-                    L = -5;
-                    R = 0;
-                }
+          // Sector 4
+            L = 0;
+            R = -5;
+          }
 
 
                 L = L * (multiplier / 5);
