@@ -41,6 +41,7 @@ unsigned int LEDRightint = 0;
 
 bool LEDRFbit;
 
+void handle_OnConnect();
 
 void setup() {
 
@@ -66,11 +67,6 @@ void setup() {
 
   //sets up what server does at each url 
   server.on("/", handle_OnConnect);
-
-  //available pages:
-  server.on("/control_1", handle_control_1);
-  server.on("/control_2", handle_control_2);
-  server.on("/control_3", handle_control_3);
     
   server.onNotFound(handle_NotFound);
   server.begin(); //start server
