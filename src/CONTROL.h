@@ -1,4 +1,4 @@
-const char CONTROL_1[] PROGMEM = R"=====(<!DOCTYPE html>
+const char CONTROL[] PROGMEM = R"=====(<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, user-scalable=no">
