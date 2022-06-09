@@ -18,7 +18,7 @@
 1. Download and install the Arduino IDE: https://www.arduino.cc/en/Main/Software
 1. Open Arduino IDE and go to **File > Preferrences** and copy and paste: https://arduino.esp8266.com/stable/package_esp8266com_index.json into the _Additional Board Manager URLs_
 1. Go to **Tools > Board > Board Manager**
-1. Search for and Install _esp8266_
+1. Search for and Install _esp8266_ (IMPORTANT: INSTALL VERSION 2.7.4)
 1. Download the lastest build file
 1. Open src.ino in the Arduino IDE
 1. Go to **Tools > Board > ESP8266 Boards > NodeMCU 1.0**
