@@ -24,22 +24,24 @@ IPAddress subnet(255,255,255,0);
 ESP8266WebServer server(80);
 
 //Left control pins 
-const byte LEDLeft = D7;
-const byte LEDLF = D6;    
-const byte LEDLB = D5;
+#define LEDLeft D7
+#define LEDLF D6    
+#define LEDLB D5
 
 unsigned int LEDLeftint = 0; //LEFT value wheel control
 
-bool LEDLFbit;  //sets direction motor spins variables (refer to L298m H bridge)
+bool LEDLFbitA;  //sets direction motor spins variables (refer to L298m H bridge)
+bool LEDLFbitB;
 
 //Right control
-const byte LEDRight = D1;
-const byte LEDRF = D2;    
-const byte LEDRB = D3;
+#define LEDRight D1
+#define LEDRF D2    
+#define LEDRB D3
 
 unsigned int LEDRightint = 0;
 
-bool LEDRFbit;
+bool LEDRFbitA;
+bool LEDRFbitB;
 
 void handle_OnConnect();
 
@@ -84,11 +86,11 @@ void loop() {
   server.handleClient();  
     
   // setting LED left and right values
-  digitalWrite(LEDLF,LEDLFbit);
-  digitalWrite(LEDLB,!(LEDLFbit));
+  digitalWrite(LEDLF,LEDLFbitA);
+  digitalWrite(LEDLB,LEDLFbitB);
   
-  digitalWrite(LEDRF,LEDRFbit);
-  digitalWrite(LEDRB,!(LEDRFbit));
+  digitalWrite(LEDRF,LEDRFbitA);
+  digitalWrite(LEDRB,LEDRFbitB);
 
   // set PWM values
   analogWrite(LEDLeft, LEDLeftint);
@@ -113,7 +115,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 {
   switch(type) 
   {
-      
     case WStype_DISCONNECTED:
       Serial.println("Client disconnnected !"+ num);
       break;
@@ -146,20 +147,34 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         LEDRightint = abs(y)*200;
 
         Serial.println(LEDLeftint); Serial.println(LEDRightint);
-        if(x <0){
-          LEDLFbit = 0;
+        
+        if(x < 0){
+          LEDLFbitA = 0;
+          LEDLFbitB = 0;
         }
 
         else{
-          LEDLFbit = 1;
+          LEDLFbitA = 1;
+          if (x == 0) {
+            LEDLFbitA = 1;
+          }
+
+          LEDLFbitB = 0;
         }
 
-        if(y<0){
-          LEDRFbit = 0;
+        
+        if(y < 0){
+          LEDRFbitA = 0;
+          LEDRFbitB = 0;
         }
 
-        if(y>=0){
-          LEDRFbit = 1;
+        else{
+          LEDRFbitA = 1;
+          if (y == 0) {
+            LEDRFbitA = 1;
+          }
+
+          LEDRFbitB = 0;
         }
       }
   }
