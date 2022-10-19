@@ -30,8 +30,8 @@ ESP8266WebServer server(80);
 
 unsigned int LEDLeftint = 0; //LEFT value wheel control
 
-bool LEDLFbitA;  //sets direction motor spins variables (refer to L298m H bridge)
-bool LEDLFbitB;
+bool LEDLFbitA = 0;  //sets direction motor spins variables (refer to L298m H bridge)
+bool LEDLFbitB = 0;
 
 //Right control
 #define LEDRight D1
@@ -40,8 +40,8 @@ bool LEDLFbitB;
 
 unsigned int LEDRightint = 0;
 
-bool LEDRFbitA;
-bool LEDRFbitB;
+bool LEDRFbitA = 0;
+bool LEDRFbitB = 0;
 
 void handle_OnConnect();
 
@@ -61,8 +61,8 @@ void setup() {
   pinMode(LEDRight, OUTPUT);
   pinMode(LEDRF, OUTPUT);
   pinMode(LEDRB, OUTPUT);
-
   
+
   //set up wifi stuff
   WiFi.softAP(SSID, PASSWORD, 6, false, 1);
   WiFi.softAPConfig(staticIP, gateway, subnet);
@@ -150,13 +150,13 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         
         if(x < 0){
           LEDLFbitA = 0;
-          LEDLFbitB = 0;
+          LEDLFbitB = 1;
         }
 
         else{
           LEDLFbitA = 1;
           if (x == 0) {
-            LEDLFbitA = 1;
+            LEDLFbitA = 0;
           }
 
           LEDLFbitB = 0;
@@ -165,13 +165,13 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
         
         if(y < 0){
           LEDRFbitA = 0;
-          LEDRFbitB = 0;
+          LEDRFbitB = 1;
         }
 
         else{
           LEDRFbitA = 1;
           if (y == 0) {
-            LEDRFbitA = 1;
+            LEDRFbitA = 0;
           }
 
           LEDRFbitB = 0;
